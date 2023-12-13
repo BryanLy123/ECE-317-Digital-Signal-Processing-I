@@ -1,0 +1,12 @@
+clear;
+clc;
+close all;
+[x,Fs] = audioread('handel.wav');
+N = 64;
+L = 5;
+xx = reshape(x, [length(x)/N, N]);
+YY = dct(xx, N, 2);
+YY(:, L+1:end) = 0;
+yy = idct(YY, N, 2);
+y = reshape(yy, [length(x), 1]);
+sound(y, Fs);
